@@ -1,0 +1,139 @@
+{
+  "entities": {
+    "ParticipantSlot": {
+      "title": "Participant Slot",
+      "description": "Represents an assigned slot for a participant inside a meeting room",
+      "type": "object",
+      "properties": {
+        "slotIndex": {
+          "type": "number",
+          "description": "The slot index, from 1 to 20"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "The verified phone number of the slot occupant"
+        },
+        "name": {
+          "type": "string",
+          "description": "The display name of the speaker"
+        },
+        "brandName": {
+          "type": "string",
+          "description": "Brand/Company name"
+        },
+        "industry": {
+          "type": "string",
+          "description": "The industry sector"
+        },
+        "designation": {
+          "type": "string",
+          "description": "Role or designation (e.g., CEO, Founder)"
+        },
+        "isMuted": {
+          "type": "boolean",
+          "description": "Whether the speaker is currently muted"
+        },
+        "cameraOn": {
+          "type": "boolean",
+          "description": "Whether the speaker's camera is enabled"
+        },
+        "isJoined": {
+          "type": "boolean",
+          "description": "Whether the speaker has joined the live meeting room"
+        }
+      },
+      "required": ["slotIndex", "phoneNumber", "name", "brandName", "industry", "designation", "isMuted", "cameraOn", "isJoined"]
+    },
+    "Meeting": {
+      "title": "Meeting",
+      "description": "Represents a networking session with timed mic spotlights",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The meeting room ID"
+        },
+        "title": {
+          "type": "string",
+          "description": "Name of the meeting boardroom"
+        },
+        "description": {
+          "type": "string",
+          "description": "Topic or summary of the session"
+        },
+        "time": {
+          "type": "string",
+          "description": "Scheduled start date-time in ISO 8601 string or YYYY-MM-DDTHH:mm format"
+        },
+        "durationPerSpeaker": {
+          "type": "number",
+          "description": "Spotlight duration in seconds"
+        },
+        "openDiscussionDuration": {
+          "type": "number",
+          "description": "Open mic session duration in seconds"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["scheduled", "warmup", "live", "completed"],
+          "description": "Session timeline state"
+        },
+        "slotsRemaining": {
+          "type": "number",
+          "description": "Remaining empty slots out of 20"
+        },
+        "currentSpeakerSlot": {
+          "type": "number",
+          "description": "Active speaker slot sequence (0 = warmup, 1-20 = speaker, 21 = discussion, 22 = completed)"
+        },
+        "speakerTurnStartedAt": {
+          "type": "number",
+          "description": "Timestamp when the active speaker turn started"
+        },
+        "openDiscussionStartedAt": {
+          "type": "number",
+          "description": "Timestamp when open discussion segment started"
+        },
+        "registeredNumbers": {
+          "type": "array",
+          "description": "Whitelist of verified participant phone numbers"
+        },
+        "slots": {
+          "type": "object",
+          "description": "A map of registered slots keyed by slotIndex"
+        }
+      },
+      "required": ["id", "title", "description", "time", "durationPerSpeaker", "openDiscussionDuration", "status", "slotsRemaining", "currentSpeakerSlot", "slots"]
+    },
+    "SiteSettings": {
+      "title": "Site Settings",
+      "description": "Global settings for the application marketing layout",
+      "type": "object",
+      "properties": {
+        "aboutText": {
+          "type": "string",
+          "description": "Introductory markdown text explaining the NEWOM format"
+        },
+        "aboutPhotoUrl": {
+          "type": "string",
+          "description": "Showcase banner photo image URL"
+        },
+        "aboutVideoUrl": {
+          "type": "string",
+          "description": "Showcase explanatory video URL"
+        }
+      },
+      "required": ["aboutText"]
+    }
+  },
+  "firestore": {
+    "site_settings/global": {
+      "schema": "SiteSettings",
+      "description": "Global settings document for the app"
+    },
+    "meetings/{meetingId}": {
+      "schema": "Meeting",
+      "description": "Individual boardrooms with participant list"
+    }
+  }
+}

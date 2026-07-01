@@ -1,0 +1,11 @@
+{
+  "name": "NEWOM",
+  "description": "Premium structured video networking with timed speaking slots, offline payments, and real-time meeting rooms.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,11 +1,6 @@
 {
   "name": "NEWOM",
-  "description": "Premium structured video networking with timed speaking slots, offline payments, and real-time meeting rooms.",
-  "requestFramePermissions": [
-    "camera",
-    "microphone"
-  ],
-  "majorCapabilities": [
-    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
-  ]
+  "description": "An exclusive, invitation-only slot-based business networking platform for Indian entrepreneurs and professionals, featuring automated speaker rotation meetings.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
